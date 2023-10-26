@@ -1,0 +1,156 @@
+// Inserting at head , tail and middle
+
+class Node{
+public:
+int data;
+Node* next;
+// creating those constructors 
+Node()
+{
+  this->data = 0;
+  this->next = NULL;
+}
+// when passed an input
+Node(int data)
+{
+  this->data = data;
+  this->next = NULL;
+}
+};
+
+// finding length
+int findLength(Node* &head)
+{
+  Node* temp = head;
+  int len = 0;
+  while(temp!=NULL)
+    {
+      temp = temp->next;
+      len++;
+    }
+  return len;
+}
+
+
+
+
+// when inserting at head
+void insertAtHead(Node* &head , Node* &tail , int data)
+{
+   //create a new node
+    Node* newNode = new Node(data);
+  // also check if linked list is empty
+  if(head == NULL)
+  {
+    tail = newNode;
+
+  }
+    // make newNode next point to the head
+    newNode->next = head;
+    head = newNode;
+  
+  
+}
+
+// when inserting at tail
+void insertAtTail(Node* &head , Node* &tail , int data)
+{
+  
+    // create a new node
+    Node* newNode = new Node(data);
+  // check if linkelist is empty
+  if(tail == NULL)
+  {
+    // create a new node make it point there
+    tail =newNode;
+    head = newNode;
+  }
+
+    // make tail point to this node
+    tail->next = newNode;
+    // replace tail to this new node
+    tail = newNode;
+}
+
+
+// inserting at any position
+
+void insertAtAnyPosition(int position , Node* &head , Node* &tail , int data)
+{
+  if(head==NULL)
+  {
+    Node* newNode = new Node(data);
+    head = newNode;
+    tail = newNode;
+    return;
+  }
+  // if position is 0
+  if(position == 0)
+  {
+    insertAtHead(head,tail,data);
+    return;
+  }
+  // if position is last 
+  int length = findLength(head);
+  
+  if(position >= length)
+  {
+    insertAtTail(head,tail,data);
+    return;
+  }
+  // finding the positions of prev and curr
+  int i=1;
+  Node* prev = head;
+  while(i<position)
+    {
+      prev = prev->next;
+      i++;
+    }
+// take current node
+  Node* curr = prev->next;
+
+
+  // step2 create a node
+  Node* newNode = new Node(data);
+
+  // 
+  newNode->next = curr;
+  //
+  prev->next = newNode;
+
+
+  
+}
+
+
+
+
+
+// when printing out
+void print(Node* head)
+{
+  Node* temp = head;
+  while(temp!=NULL)
+    {
+      cout<<temp->data<<" ";
+      temp = temp->next;
+    }
+}
+
+int main()
+{
+  Node* head = NULL;
+  Node* tail = NULL;
+  insertAtHead(head,tail,46);
+  insertAtHead(head,tail,66);
+  insertAtHead(head,tail,76);
+  insertAtTail(head,tail,86);
+  insertAtTail(head,tail,96);
+  insertAtTail(head,tail,106);
+  
+  print(head);
+  cout<<endl;
+  // insertAtAnyPosition(1,head,tail,102);
+  insertAtAnyPosition(0,head,tail,23);
+  print(head);
+}
