@@ -1,0 +1,74 @@
+// In a LinkedList inserting elements from head and tail;
+
+class Node{
+public:
+int data;
+Node* next;
+// constructors 
+Node()
+{
+  this->data = 0;
+  this->next = NULL;
+}
+Node(int data)
+{
+  this->data = data;
+  this->next = NULL;
+}
+};
+
+void insertAtHead(Node* &head , Node* &tail , int data)
+{
+  
+  // create a node
+  Node* newNode = new Node(data);
+  // point the next to new element
+  newNode->next = head;
+  // extra cases
+  if(head == NULL)
+  {
+    tail=newNode;
+  }
+  //update the head pointer
+  head = newNode;
+}
+void insertAtTail(Node* &head , Node* &tail , int data)
+{
+  // create a node 
+  Node* newNode = new Node(data);
+  // when LinkedList is empty
+  if(tail==NULL)
+  {
+    tail=newNode;
+    head=newNode;
+  }
+  // point the next of tail to new element
+  tail->next =  newNode;
+  // update the tail pointer
+  tail = newNode;
+}
+
+void print(Node* head)
+{
+  Node* temp = head;
+  while(temp != NULL)
+    {
+      cout<<temp->data<<" ";
+      temp = temp->next;
+    }
+}
+
+int main()
+{
+  Node* head = NULL;
+  Node* tail = NULL;
+  insertAtHead(head,tail,90);
+  insertAtHead(head,tail,100);
+  insertAtHead(head,tail,110);
+  insertAtTail(head,tail,55);
+  insertAtTail(head,tail,65);
+  insertAtTail(head,tail,75);
+
+  // print that shit
+  print(head);
+}
