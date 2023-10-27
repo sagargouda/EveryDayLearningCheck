@@ -1,0 +1,87 @@
+// creating stacks from scratch 
+
+#include <iostream>
+using namespace std;
+
+class Stack{
+public:
+int size;
+int* arr;
+int peak;
+
+// constructors which are parameterized
+Stack(int size)
+{
+  this->size = size;
+  arr = new int[size];
+  peak = -1;
+}
+// some functions what will stack do 
+void push(int element)
+{
+  // check if stack is empty
+  if(size-peak > 1)
+  {
+    peak++;
+    arr[peak] = element;
+  }
+  else
+  {
+    cout<<"Stack is full"<<endl;
+  }
+}
+
+void pop()
+{
+  // check is stack is empty or not
+  if(peak==-1)
+  {
+    cout<<"stack is empty"<<endl;
+  }
+  else
+  {
+    peak--;
+  }
+}
+
+// check if stack is empty or not
+bool isEmpty()
+{
+  if(peak==-1)
+  {
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+// get size 
+int getSize()
+{
+  return peak+1;
+}
+// get top element or peak element
+
+int getPeak()
+{
+  return arr[peak];
+}
+
+};
+
+
+int main() {
+
+  Stack sagar(10);
+  sagar.push(12);
+  sagar.push(22);
+  sagar.push(32);
+
+  while(!sagar.isEmpty())
+    {
+      cout<<sagar.getPeak()<<endl;
+      sagar.pop();
+    }
+  
+  
+}
