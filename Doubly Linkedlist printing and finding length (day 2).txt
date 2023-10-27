@@ -1,0 +1,74 @@
+// Doubly Linkedlist 
+
+#include <iostream>
+using namespace std;
+
+class Node{
+public:
+int data;
+Node* prev;
+Node* next;
+
+//default constructor
+Node(){
+  this->data = 0;
+  this->prev = NULL;
+  this->next = NULL;
+}
+// parameterized constructor
+Node(int data)
+{
+  this->data = data;
+  this->prev = NULL;
+  this->next = NULL;
+}
+
+};
+
+// print that shit
+void print(Node* head)
+{
+  Node* temp = head;
+  while(temp!=NULL)
+    {
+      cout<<temp->data<<' ';
+      temp = temp->next;
+    }
+}
+// finding lenth
+int getLength(Node* &head)
+{
+  int length =0;
+  Node* temp = head;
+
+
+  while(temp!=NULL)
+    {
+      temp=temp->next;
+      length++;
+    }
+  return length;
+}
+
+
+int main() {
+  Node* first = new Node(10);
+  Node* second = new Node(20);
+  Node* third = new Node(30);
+  Node* fourth = new Node(40);
+
+
+  first->prev = NULL;
+  first->next = second;
+  second->prev = first;
+  second->next = third;
+  third->prev = second;
+  third->next = fourth;
+  fourth->prev = third;
+  fourth->next = NULL;
+
+print(first);
+
+
+  
+}
