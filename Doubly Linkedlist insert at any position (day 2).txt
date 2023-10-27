@@ -1,0 +1,181 @@
+// Doubly Linkedlist insert at any position
+
+
+#include <iostream>
+using namespace std;
+
+class Node{
+public:
+int data;
+Node* prev;
+Node* next;
+
+//default constructor
+Node(){
+  this->data = 0;
+  this->prev = NULL;
+  this->next = NULL;
+}
+// parameterized constructor
+Node(int data)
+{
+  this->data = data;
+  this->prev = NULL;
+  this->next = NULL;
+}
+
+};
+
+// print that shit
+void print(Node* head)
+{
+  Node* temp = head;
+  while(temp!=NULL)
+    {
+      cout<<temp->data<<' ';
+      temp = temp->next;
+    }
+}
+// finding lenth
+int getLength(Node* &head)
+{
+  int length =0;
+  Node* temp = head;
+
+
+  while(temp!=NULL)
+    {
+      temp=temp->next;
+      length++;
+    }
+  return length;
+}
+
+// inserting at head
+void insertAtHead(Node* &head , Node* &tail , int data)
+{
+  if(head == NULL)
+  {
+    // my linkedlist is empty
+    Node* newNode = new Node(data);
+    head = newNode;
+    tail = newNode;
+  }
+  else
+  {
+    // if linkedlist is non empty
+    // craete a node
+    Node* newNode = new Node(data);
+    //step 2
+    newNode->next = head;
+    // step 3
+    head->prev = newNode;
+    // step 4
+    head = newNode;
+  }
+}
+
+// inserting at tail
+
+
+void insertAtTail(Node* &head , Node* &tail , int data)
+{
+  if(tail == NULL)
+  {
+    // when linkedlist is empty
+    Node* newNode = new Node(data);
+    head = newNode;
+    tail = newNode;
+  }
+  else
+  {
+    //LL is not empety
+    // create a node
+    Node* newNode = new Node(data);
+    // step2 
+    tail->next = newNode;
+    // step 3
+    newNode->prev = tail;
+    // step 4
+    tail = newNode;
+  }
+  
+}
+
+void insertAtPosition(int position , Node* &head , Node* &tail , int data)
+{
+  if(head==NULL)
+  {
+    Node* newNode = new Node(data);
+    head = newNode;
+    tail = newNode;
+  }
+  else{
+    // LL is not empty
+    // insert at 1st position
+    if(position == 1)
+    {
+      insertAtHead(head,tail,data);
+      return;
+    }
+    // insert at last position
+   int len = getLength(head);
+    else if(position > len)
+   {
+     insertAtTail(head,tail,data);
+     return;
+   }
+
+    // middle insert
+    // step 1 : find prev and curr
+    int i=1;
+    Node* prevNode = head;
+    while(i<position-1)
+      {
+        prevNode = prevNode->next;
+        i++;
+      }
+    Node* currNode = prevNode->next;
+
+    // step 2 : create a node
+    Node* newNode = new Node(data);
+    
+    // step 3
+    prevNode->next = newNode;
+    newNode->prev = prevNode;
+    curr->prev = newNode;
+    newNode->next = curr;
+  }
+
+}
+
+
+
+
+int main() {
+  Node* first = new Node(10);
+  Node* second = new Node(20);
+  Node* third = new Node(30);
+  Node* fourth = new Node(40);
+
+  Node* head = first;
+  Node* tail = fourth;
+
+  first->prev = NULL;
+  first->next = second;
+  second->prev = first;
+  second->next = third;
+  third->prev = second;
+  third->next = fourth;
+  fourth->prev = third;
+  fourth->next = NULL;
+
+print(first);
+cout<<endl;
+  insertAtHead(head,tail,101);
+  cout<<endl;
+  print(head);
+
+
+  
+}
