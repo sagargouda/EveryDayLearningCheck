@@ -1,0 +1,93 @@
+// implementing 2 stacks in an array
+
+#include <iostream>
+using namespace std;
+
+class Stack{
+public:
+// 2 stacks in an array
+int size;
+int* arr;
+int peak1;
+int peak2;
+
+// constructors which are parameterized
+Stack(int size)
+{
+  this->size = size;
+  arr = new int[size];
+  peak1 = -1;
+  peak2 = size;
+}
+
+void push1(int element)
+{
+  // check if stack is empty or not
+  if(peak2-peak1 == 1)
+  {
+    cout<<"Space not available in stack 1"<<endl;
+  }
+  else
+  {
+    peak1++;
+    arr[peak1] = element;
+  }
+    
+}
+
+void pop1(int element)
+{
+  // if stack has no elements
+  if(peak1==-1)
+  {
+    cout<<"stack 1 is in underflow"<<endl;
+  }
+  else
+  {
+    peak1--;
+  }
+
+
+  
+}
+
+void push2(int element)
+{
+  // check if stack is empty or not
+  if(peak2-peak1 == 1)
+  {
+    cout<<"Space not available in stack 2"<<endl;
+  }
+  else
+  {
+    peak2--;
+    arr[peak2] = element;
+  }
+}
+void pop2(int element)
+{
+  // if stack has no elements
+  if(peak2==size)
+  {
+    cout<<"stack 2 is underflow"<<endl;
+  }
+  else
+  {
+    peak2++;
+  }
+
+}
+
+};
+
+int main() {
+
+  Stack sagar(10);
+  sagar.push1(20);
+  sagar.push1(40);
+  sagar.push2(80);
+  sagar.push2(90);
+
+  
+}
+
