@@ -1,0 +1,226 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+public:
+int data;
+Node* next;
+
+//constructor
+Node()
+{
+  this->data = 0;
+  this->next = NULL;
+}
+// parameterized constructor calls
+Node(int data)
+{
+  this->data = data;
+  this->next = NULL;
+}
+~Node()
+{
+  cout<<"deleted this node"<<endl;
+}
+
+};
+
+int findLength(Node* &head)
+{
+  int len = 0;
+  Node* temp = head;
+  while(temp!=NULL)
+    {
+      temp=temp->next;
+      len++;
+    }
+  return len;
+}
+
+
+// when inserted at head 
+void insertAtHead(Node* &head , Node* &tail , int data)
+{
+
+  // if LL is empty
+  if(head == NULL)
+  {
+    // create a new node first
+    Node* newNode = new Node(data);
+    head = newNode;
+    tail = newNode;
+  }
+    // if LL is having elements
+  else
+  {
+    // create a new node asusal
+    Node* newNode = new Node(data);
+    newNode->next = head;
+    head=newNode;
+  }
+}
+
+
+// inserting at tail
+
+void insertAtTail(Node* &head , Node* &tail , int data)
+{
+  //if Linked list is empty
+  if(head == NULL)
+  {
+    // create a new Node 
+    Node* newNode=new Node(data);
+    head = newNode;
+    tail = newNode;
+  }
+  else
+  {
+    // if linked list is not empty
+    Node* newNode = new Node(data);
+    tail->next = newNode;
+    tail = newNode;
+  }
+}
+
+// insert at any position you want
+void insertAtPosition(Node* &head,Node* &tail,int data , int position)
+{
+  // what if my linked list is empty
+  if(head == NULL)
+  {
+    // create a new node (here position doesn't matter because it is the first element we are inserting)
+    Node* newNode = new Node(data);
+    head = newNode;
+    tail = newNode;
+  }
+  else
+  {
+    // if position is one that obvoiously means to insert at head 
+
+    if(position==0)
+    {
+      insertAtHead(head,tail,data);
+      return;
+    }
+    // if position is last then obvisuoly insert at last position but how do i find last position
+    int length = findLength(head);
+
+    if(position > length)
+    {
+      cout<<"enter a valid position"<<endl;
+      return;
+    }
+    
+    if(position == length)
+    {
+      insertAtTail(head,tail,data);
+      return;
+    }
+    //for middle positions 
+    else
+    {
+      int i = 1;
+      Node* prev = head;
+      while(i<position)
+        {
+          prev = prev->next;
+          i++;
+        }
+      Node* curr = prev->next;
+      // create a new node
+      Node* newNode = new Node(data);
+      newNode->next = curr;
+      prev->next = newNode;
+    }
+
+  }
+}
+
+// deletion of a node in a linked list
+
+void deleteAtAnyPosition(Node* &head , Node* &tail , int position)
+{
+  // if there are no elements in linked lis
+  if(head == NULL)
+  {
+    cout<<"Hey add few elements to delete something"<<endl;
+    return;
+  }
+  // deleting in head
+  if(position == 0)
+  {
+    Node* temp = head;
+    head = head->next;
+    temp->next = NULL;
+    delete temp;
+    temp = NULL;
+    return;
+  }
+  // deleting in tail
+  int len = findLength(head);
+  if(position > len)
+  {
+    cout<<"Enter valid position to delete"<<endl;
+    return;
+  }
+  if(position == len)
+  {
+    int i = 1;
+    Node* prev = head;
+    while(i<position-1)
+      {
+        prev = prev->next;
+        i++;
+      }
+    prev->next = NULL;
+    Node* temp = tail;
+    tail = prev;
+    delete temp;
+    temp = NULL;
+    return;
+  }
+  // deleting at any position 
+  else
+  {
+    int i = 1;
+    Node* prev = head;
+    while(i < position-1)
+      {
+        prev= prev->next;
+        i++;
+      }
+    Node*curr = prev->next;
+    prev->next = curr->next;
+    curr->next=NULL;
+    delete curr;
+    curr = NULL;
+    return;
+  }
+}
+
+
+// printing 
+void print(Node* head)
+{
+  // create a temporary temp
+  Node* temp = head;
+  while(temp != NULL)
+    {
+      cout<<temp->data<<" ";
+      temp = temp->next;
+    }  
+}
+
+int main() {
+ Node* head = NULL;
+ Node* tail = NULL;
+  insertAtHead(head,tail ,23);
+  insertAtHead(head,tail ,33);
+  insertAtHead(head,tail ,43);
+  insertAtTail(head,tail,74);
+  insertAtTail(head,tail,84);
+  insertAtTail(head,tail,94);
+  insertAtPosition(head,tail,65,6);
+  deleteAtAnyPosition(head,tail,4);
+  print(head);
+}
