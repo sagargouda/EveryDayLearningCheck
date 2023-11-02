@@ -1,0 +1,89 @@
+// creating 2 stacks in 1 array
+#include<iostream>
+using namespace std;
+class Stack{
+int size;
+int* arr;
+int top1;
+int top2;
+
+// constructors 
+Stack(int size)
+{
+  this->size = size;
+  arr = new int[size];
+  top1 = -1;
+  top2 = size;
+}
+// push for stack 1 
+ void push1(int element)
+{
+  // what if there is no space 
+  if(top2-top1 == 1 )
+  {
+    cout<<"no space bruh ";
+  }
+  else
+  {
+    top1++;
+    arr[top1] =  element;
+  }
+}
+// pop for stack 1
+void pop1()
+{
+  // what if no elements are present 
+  if(top1==-1)
+  {
+    cout<<"add eleemnts"<<endl;
+  }
+  else
+  {
+    top1--;
+  }
+}
+// push for stack 2
+ void push2(int element)
+{
+  // what if there is no space 
+  if(top2-top1 == 1 )
+  {
+    cout<<"no space bruh ";
+  }
+  else
+  {
+    top2--;
+    arr[top2] =  element;
+  }
+}
+// pop for stack 2
+void pop2()
+{
+  // what if no elements are present 
+  if(top2==size)
+  {
+    cout<<"add eleemnts"<<endl;
+  }
+  else
+  {
+    top2++;
+  }
+}
+
+
+};
+
+
+
+int main()
+{
+  Stack s(10);
+   s.push1(5);
+   s.push1(15);
+   s.push1(25);
+   s.push1(35);
+   s.push2(4);
+   s.push2(14);
+   s.push2(24);
+   s.push2(34);
+}
