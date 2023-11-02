@@ -1,0 +1,88 @@
+// stack implementation
+
+#include <iostream>
+using namespace std;
+
+class Stack
+{
+  public:
+  int size;
+  int top; 
+  int* arr;
+// constructor
+ Stack(int size)
+{
+  this->size=size;
+  arr = new int[size];
+  top = -1;
+}
+
+
+void push(int element)
+{
+  // what if my stack is full
+  if(size-top > 1)
+  {
+    top++;
+    arr[top] = element;
+  }
+  else
+  {
+    cout<<"stack overflow "<<endl;
+  }
+}
+
+void pop()
+{
+  // what if my stack is empty i can not pop
+  if(top == -1)
+  {
+    cout<<"stack is empty so don't pop"<<endl;
+  }
+  else
+  {
+    top--;
+  }
+}
+
+int getTop()
+{
+  // what if there no elements in stack 
+  if(top == -1)
+  {
+    cout<<"No elements in stack to show top element"<<endl;
+  }
+    return arr[top];
+  
+}
+
+int getSize()
+{
+  return top + 1;
+}
+
+bool is_empty()
+{
+  if(top == -1)
+  {
+    return true;
+  }
+  return false;
+}
+
+};
+
+int main() {
+  Stack s(6);
+  s.push(20);
+  s.push(40);
+  s.push(60);
+  s.push(80);
+  cout<<s.getSize()<<endl;
+  while(!s.is_empty())
+    {
+      cout<<s.getTop()<<" ";
+      s.pop();
+    }
+
+}
