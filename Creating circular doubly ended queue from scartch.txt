@@ -1,0 +1,139 @@
+// creating circular doubly ended queue fro scartch
+
+
+#include<iostream>
+using namespace std;
+
+class Deque{
+public:
+int size;
+int* arr;
+int front;
+int rear ;
+
+// constrctor
+Deque(int size)
+{
+  this->size=size;
+  arr = new int[size];
+  front=-1;
+  rear = -1;
+}
+
+// member function
+void pushRear(int data)
+{
+  // if deque is full
+  if(front==0 && rear == size-1)
+  {
+    cout<<"deque is full don't try to add"<<endl;
+    return;
+  }
+  else if(front == -1)
+  {
+    // first element addition
+    front=rear=0;
+    arr[rear]=data;
+  }
+  else if(rear == size-1 && front!=0)
+  {
+    // handling circular condition
+    rear = 0;
+    arr[rear]=data;
+  }
+  else
+  {
+    // normal case
+    rear++;
+    arr[rear] = data;
+  }
+}
+
+// push front 
+
+void pushFront(int data)
+{
+  // if deque is full
+  if(front==0 && rear == size-1)
+  {
+    cout<<"deque is full don't try to add"<<endl;
+    return;
+  }
+  else if(front == -1)
+  {
+    // first element addition
+    front=rear=0;
+    arr[front]=data;
+  }
+  else if(front==0 && rear != size-1)
+  {
+    // handling circular condition
+    front =  size-1;
+    arr[front]=data;
+  }
+  else
+  {
+    // normal case
+    front--;
+    arr[front] = data;
+  }
+}
+
+void popFront()
+{
+  // check are there elements to pop
+  if(front==-1)
+  {
+    cout<<"no elements present to pop"<<endl;
+    return;
+  }
+  else if(front==rear)
+  {
+    // single element pop
+    arr[front]=-1;
+    front=-1;
+    rear=-1;
+  }
+  else if(front == size-1)
+  {
+    // circular case 
+    front = 0;
+  }
+  else
+  {
+    front++;
+  }
+}
+
+void popRear()
+{
+  // check are there elements to pop
+  if(front==-1)
+  {
+    cout<<"no elements present to pop"<<endl;
+    return;
+  }
+  else if(front==rear)
+  {
+    // single element pop
+    arr[front]=-1;
+    front=-1;
+    rear=-1;
+  }
+  else if(rear == 0)
+  {
+    // circular case 
+    rear = size-1;
+  }
+  else
+  {
+    rear--;
+  }
+}
+
+};
+
+int main()
+{
+  
+}
