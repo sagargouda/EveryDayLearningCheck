@@ -1,0 +1,79 @@
+// creating circular queues fro scartch
+
+
+#include<iostream>
+using namespace std;
+
+class Queue{
+public:
+int size;
+int front;
+int rear;
+int* arr;
+
+// construtor
+Queue(int size)
+{
+  this->size = size;
+  front = -1;
+  rear = -1;
+  arr = new int[size];
+}
+
+// memeber functions
+void push(int element)
+{
+  // check if queue is full or empty
+  if(rear==size-1 && front == 0)
+  {
+    cout<<"Queue is full";
+  }
+  else if(front==-1)
+  {
+    // first element insertion
+    front=rear=0;
+    arr[rear] = element;
+  }
+    // circular nature
+  else if(rear == size-1 && front != 0)
+  {
+    rear = 0;
+    arr[rear]=element;
+  }
+  else
+  {
+    rear++;
+    arr[rear] = element;
+  }
+}
+
+void pop()
+{
+  // empty check
+  if(front == -1)
+  {
+    cout<<"queue is empty"<<endl;
+  }
+    // singlr element case
+  else if(front == rear)
+  {
+    arr[front] = -1;
+    front = -1;
+    rear = -1;
+  }
+    // circular
+  else if(front==size-1)
+  {
+    front = 0;
+  }
+  // normal case move forward
+  else{
+    front++;
+  }
+}
+
+};
+int main()
+{
+  
+}
