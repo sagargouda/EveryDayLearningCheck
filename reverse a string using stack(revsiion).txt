@@ -1,0 +1,24 @@
+// reverse a string using stack
+
+#include<iostream>
+#include<stack>
+#include<string.h>
+using namespace std;
+
+int main()
+{
+  string s = "sagar";
+  stack<char>reddy;
+
+  for(int i = 0;i<s.length();i++)
+    {
+      char ch = s[i];
+      reddy.push(ch);
+    }
+  // print for stack 
+  while(!reddy.empty())
+    {
+      cout<<reddy.top()<<" ";
+      reddy.pop();
+    }
+}
