@@ -1,0 +1,93 @@
+// creating queues from scartch
+
+#include <iostream>
+using namespace std;
+
+class Queue{
+public:
+int size;
+int* arr;
+int front;
+int rear;
+
+Queue(int size)
+{
+  this->size = size;
+  arr = new int[size];
+  front = 0;
+  rear  = 0;
+}
+
+void push(int data)
+{
+  // what if my queue is full
+  if(rear == size)
+  {
+    cout<<"queue is full make space"<<endl;
+  }
+  else
+  {
+    arr[rear] = data;
+    rear++;
+  }
+}
+
+void pop()
+{
+  // what if my queue is empty
+  if(front == rear)
+  {
+    cout<<"queue is empty please add something"<<endl;
+  }
+  else
+  {
+    arr[front] = -1;
+    front++;
+    if(front == rear)
+    {
+      front=0;
+      rear =0;
+    }
+  }
+}
+
+bool is_empty()
+{
+  if(front == rear)
+  {
+    return true;
+  }
+  return false;
+}
+
+int getFront()
+{
+  return arr[front];
+}
+
+int getSize()
+{
+  return rear;
+}
+
+
+
+};
+
+
+int main() {
+  Queue sagar(10);
+  sagar.push(12);
+  sagar.push(22);
+  sagar.push(32);
+  sagar.push(42);
+  sagar.push(52);
+  sagar.push(62);
+  cout<<sagar.getSize()<<endl;
+
+  while(!sagar.is_empty())
+    {
+      cout<<sagar.getFront()<<" ";
+      sagar.pop();
+    }
+}
