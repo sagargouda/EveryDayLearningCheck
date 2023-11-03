@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+
+class Node{
+public:
+int data;
+Node* next;
+
+// constructot
+Node(int data)
+{
+  this->data = data;
+  this->next = NULL;
+}
+};
+
+void print(Node* first)
+{
+  Node* temp = first;
+  while(temp != NULL)
+    {
+      cout<<temp->data<<" ";
+      temp=temp->next;
+    }
+}
+
+int middleElement(Node* &first)
+{
+  Node* slow = first;
+  Node* fast = first->next;
+
+  while(slow != NULL && fast != NULL)
+    {
+      fast = fast->next;
+      if(fast != NULL)
+      {
+        fast = fast->next;
+        slow=slow->next;
+      }
+    }
+  return slow->data;
+}
+
+
+
+
+int main() {
+  Node* first = new Node(34);
+  Node* second = new Node(44);
+  Node* third = new Node(54);
+  Node* fourth = new Node(64);
+  Node* fifth = new Node(74);
+  Node* sixth = new Node(84);
+ 
+  first->next = second;
+  second->next = third;
+  third->next = fourth;
+  fourth->next = fifth;
+  fifth->next = sixth;
+
+  print(first);
+  cout<<endl;
+
+  cout<<middleElement(first)<<endl;
+  
+}
