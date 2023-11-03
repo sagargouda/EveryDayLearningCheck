@@ -1,0 +1,47 @@
+// inserting at bottom
+
+#include <iostream>
+#include<stack>
+using namespace std;
+
+void solve(stack<int>&st,int target)
+{
+  // base case 
+  if(st.empty())
+  {
+    st.push(target);
+    return;
+  }
+  int temp  = st.top();
+  st.pop();
+  // recursive functiobn
+  solve(st,target);
+  // back track
+  st.push(temp);
+}
+
+void insertAtBottom(stack<int>&st)
+{
+  int target = st.top();
+  st.pop();
+  solve(st,target);
+}
+
+int main() {
+ stack<int>st;
+  st.push(34);
+  st.push(44);
+  st.push(54);
+  st.push(64);
+  st.push(74);
+
+
+   insertAtBottom(st);
+
+  cout<<"printing out "<<endl;
+  while(!st.empty())
+    {
+      cout<<st.top()<<" ";
+      st.pop();
+    }
+}
