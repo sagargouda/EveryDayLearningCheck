@@ -1,0 +1,103 @@
+// is palindorme
+
+#include <iostream>
+using namespace std;
+
+class Node{
+public:
+int data;
+Node* next;
+
+Node(int data)
+{
+  this->data = data;
+  this->next = NULL;
+}
+};
+
+Node* reverse(Node* head)
+{
+  Node* prev = NULL;
+  Node* curr = head;
+  Node* next = curr->next;
+
+  while(curr !=NULL)
+    {
+      next = curr->next;
+      curr->next=prev;
+      prev=curr;
+      curr=next;
+    }
+  return prev;
+}
+
+
+
+
+bool palindrome(Node* &head)
+{
+  // step a : find middle node 
+  Node* slow = head;
+  Node* fast = head->next;
+
+  while(fast != NULL)
+    {
+      fast = fast->next;
+      if(fast != NULL)
+      {
+         fast = fast->next;
+        slow = slow->next;
+      }
+    }
+  // slow pointer pointing to middle node 
+  // step -2 reverse linked list after middle node
+  Node* reverseka = reverse(slow->next);
+
+  // slow ke aage reverse lagado
+  slow->next = reverseka;
+
+  // comparsion kar bhai
+  Node* temp1 = head;
+  Node* temp2 = reverseka;
+
+  while(temp2 !=NULL)
+    {
+      if(temp1->data != temp2->data)
+      {
+        // not a palindorme 
+        return false;
+      }
+      else 
+      {
+        // if data is equal 
+        temp1 = temp1->next;
+        temp2=temp2->next;
+      }
+    }
+  return true;
+}
+
+
+int main() {
+  Node* head  = new Node(10);
+   Node* second  = new Node(20);
+   Node* third = new Node(30); 
+  Node* four  = new Node(40);
+   Node* five  = new Node(50);
+
+  head->next = second;
+  second->next = third;
+  third->next = four;
+  four->next = five;
+
+  bool ispalindrome = palindrome(head);
+
+  if(ispalindrome)
+  {
+    cout<<"valid"<<endl;
+  }
+  else
+  {
+    cout<<"not valid"<<endl;
+  }
+}
